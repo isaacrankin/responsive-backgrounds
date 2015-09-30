@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Responsive Backgrounds</title>
+        <style>
+            body{
+                font-family: sans-serif;
+                font-size: 1.2em;
+                line-height: 1.4em;
+                -webkit-font-smoothing: antialiased;
+            }
+            section{
+                padding: 2em;
+                color: #FFF;
+            }
+            /* Useful styles to keep */
+            .rsp-bg{
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        </style>
+    </head>
+    <body>
+        <!--
+            Define image sizes as data attributes.
+            Optionally add a default background image, the default image will be loaded by all devices so best to keep it small.
+        -->
+        <section class="rsp-bg" style="background-image: url('img/small.jpg');"
+                data-bg-small="img/small.jpg"
+                data-bg-medium="img/medium.jpg"
+                data-bg-large="img/large.jpg">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, unde, assumenda. Quaerat quas, recusandae eum obcaecati id tenetur culpa aperiam esse possimus, eaque, non, incidunt neque? Deleniti neque, consequatur incidunt.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, unde, assumenda. Quaerat quas, recusandae eum obcaecati id tenetur culpa aperiam esse possimus, eaque, non, incidunt neque? Deleniti neque, consequatur incidunt.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, unde, assumenda. Quaerat quas, recusandae eum obcaecati id tenetur culpa aperiam esse possimus, eaque, non, incidunt neque? Deleniti neque, consequatur incidunt.</p>
+        </section>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="dist/responsive-backgrounds.min.js"></script>
+    <script>
+        $(function(){
+            new ResponsiveBG({
+                $el: $('.rsp-bg'),
+                breakpoints: {
+                    small: window.matchMedia('all and (max-width: 767px)'),
+                    medium: window.matchMedia('all and (min-width:768px ) and (max-width: 1440px)'),
+                    large: window.matchMedia('all and (min-width: 1441px)')
+                }
+            });
+        });
+    </script>
+</html>

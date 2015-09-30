@@ -1,0 +1,27 @@
+{
+    "name": "responsive-backgrounds",
+    "version": "1.0.0",
+    "description": "A responsive backgrounds solution, useful when working CMS generated HTML.",
+    "keywords": [
+        "responsive backgrounds"
+    ],
+    "main": "index.js",
+    "scripts": {
+        "start": "gulp"
+    },
+    "author": "Isaac Rankin",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/npm/npm.git"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "gulp": "^3.9.0",
+        "gulp-babel": "^5.2.1",
+        "gulp-plumber": "^1.0.1",
+        "gulp-rename": "^1.2.2",
+        "gulp-uglify": "^1.4.1",
+        "jshint": "^2.8.0"
+    }
+}
