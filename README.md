@@ -17,27 +17,24 @@ It utilizes [window.matchMedia](https://developer.mozilla.org/en-US/docs/Web/API
 
 ### Instantiate class
 
-    new ResponsiveBG({
-        $el: $('.rsp-bg'),
-        breakpoints: {
-            small: window.matchMedia('all and (max-width: 767px)'),
-            medium: window.matchMedia('all and (min-width:768px ) and (max-width: 1440px)'),
-            large: window.matchMedia('all and (min-width: 1441px)')
-        }
+    new ResponsiveBackgrounds({
+      elements: document.getElementsByClassName('rsp-bg'),
+      breakpoints: {
+        small: window.matchMedia('all and (max-width: 767px)'),
+        medium: window.matchMedia('all and (min-width:768px ) and (max-width: 1440px)'),
+        large: window.matchMedia('all and (min-width: 1441px)')
+      }
     });
 
 ### Options
 
-- `$el` should be the jQuery object you want to target.
-- `breakpoints` a hash of MediaQueryList's, the keys should correspond to the data attribute names on `$el`, e.g. `data-bg-query-name`
+- `elements` should be an HTMLCollection of elements
+- `breakpoints` an object of MediaQueryList's, the keys should correspond to the data attribute names on the elements, e.g. `data-bg-query-name`
 
 Have a look at `index.html` as an example.
 
 ## Browser Support
 Evergreen browsers, IE10 and up.
-
-## Dependencies
-- [jQuery](https://jquery.com/)
 
 ## Dev Dependencies
 - [Babel](http://babeljs.io/)

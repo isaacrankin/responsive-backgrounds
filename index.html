@@ -36,18 +36,15 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, unde, assumenda. Quaerat quas, recusandae eum obcaecati id tenetur culpa aperiam esse possimus, eaque, non, incidunt neque? Deleniti neque, consequatur incidunt.</p>
         </section>
     </body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="dist/responsive-backgrounds.min.js"></script>
+    <script src="dist/ResponsiveBackgrounds.min.js"></script>
     <script>
-        $(function(){
-            new ResponsiveBG({
-                $el: $('.rsp-bg'),
-                breakpoints: {
-                    small: window.matchMedia('all and (max-width: 767px)'),
-                    medium: window.matchMedia('all and (min-width:768px ) and (max-width: 1440px)'),
-                    large: window.matchMedia('all and (min-width: 1441px)')
-                }
-            });
-        });
+      new ResponsiveBackgrounds({
+        elements: document.getElementsByClassName('rsp-bg'),
+        breakpoints: {
+          small: window.matchMedia('all and (max-width: 767px)'),
+          medium: window.matchMedia('all and (min-width:768px ) and (max-width: 1440px)'),
+          large: window.matchMedia('all and (min-width: 1441px)')
+        }
+      });
     </script>
 </html>
