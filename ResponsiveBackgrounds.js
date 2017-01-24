@@ -20,33 +20,34 @@ class ResponsiveBackgrounds {
    * @private
    */
   _events() {
-    for (var bp in this.breakpoints) {
+    let bps = this.breakpoints;
+
+    for (var bp in bps) {
 
       // remove and skip invalid breakpoints
-      if (this.breakpoints[bp].constructor.name !== 'MediaQueryList') {
+      if (Object.prototype.toString.call(bps[bp]) !== '[object MediaQueryList]') {
         console.warn(`ResponsiveBackgrounds - Invalid breakpoint ${bp}.`);
-        delete this.breakpoints[bp];
+        delete bps[bp];
         continue;
       }
 
       // add label for reference in event
-      this.breakpoints[bp].label = bp;
+      bps[bp].label = bp;
 
       // also update backgrounds first up
-      if (this.breakpoints[bp].matches) {
-        this._updateBackgrounds(this.elements, bp);
+      if (bps[bp].matches) {
+        this._updateBackgrounds(this.elements, this.breakpoints, bp);
       }
 
       // apply matchMedia listeners
-      this.breakpoints[bp].addListener((e) => {
+      bps[bp].addListener((e) => {
         if (e.matches) {
-          // this addresses a browser quirk in FF (or Safari?)
-          var curBp = (e.label) ? e.label : e.currentTarget.label;
-          this._updateBackgrounds(this.elements, curBp);
+          // this addresses a browser quirk in Safari
+          let curBp = (e.label) ? e.label : e.currentTarget.label;
+          this._updateBackgrounds(this.elements, this.breakpoints, curBp);
         }
       });
     }
-
   }
 
   /**
@@ -72,18 +73,19 @@ class ResponsiveBackgrounds {
    * Update the elements background images
    *
    * @param elements {Array}
-   * @param breakpointName {Object}
+   * @param breakpoints {Object}
+   * @param breakpointName {String}
    * @private
    */
-  _updateBackgrounds(elements, breakpointName) {
+  _updateBackgrounds(elements, breakpoints, breakpointName) {
 
     // find and validate breakpoint
-    let currentBp = this.breakpoints[breakpointName],
+    let currentBp = breakpoints[breakpointName],
 
       // data attributes are automatically camelCased - so 'data-bg-small' becomes 'bgSmall'
       bpNameUc = breakpointName.charAt(0).toUpperCase() + breakpointName.slice(1);
 
-    if (currentBp && currentBp.constructor.name === 'MediaQueryList') {
+    if (currentBp) {
 
       // loop over elements
       elements.map((val) => {
@@ -92,6 +94,7 @@ class ResponsiveBackgrounds {
 
         if(newBg) {
           // set multiple backgrounds if original bg is set
+          // the original image will be visible while the new image loads
           val.style['background-image'] = (origBg) ? `${origBg}, url('${newBg}')` : `url('${newBg}')`;
         } else {
           console.warn(`ResponsiveBackgrounds - Cannot find image for ${breakpointName} size.`);
